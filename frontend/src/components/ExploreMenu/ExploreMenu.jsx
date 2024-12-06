@@ -1,23 +1,26 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './ExploreMenu.css'
-import { menu_list } from '../../assets/assets'
+import { StoreContext } from '../../Context/StoreContext'
 
-const ExploreMenu = ({category, setCategory}) => {
+const ExploreMenu = ({category,setCategory}) => {
+
+  const {menu_list} = useContext(StoreContext);
+  
   return (
     <div className='explore-menu' id='explore-menu'>
       <h1>Explore nosso cardápio</h1>
-      <p className='explore-menu-text' >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nec nunc eget arcu fermentum laoreet. Nam molestie ultrices facilisis.</p>
+      <p className='explore-menu-text'>Escolha entre um menu diversificado com uma deliciosa variedade de pratos. Nossa missão é satisfazer seus desejos e elevar sua experiência gastronômica, uma deliciosa refeição de cada vez.</p>
       <div className="explore-menu-list">
-        {menu_list.map((item,index)=> {
+        {menu_list.map((item,index)=>{
             return (
                 <div onClick={()=>setCategory(prev=>prev===item.menu_name?"All":item.menu_name)} key={index} className='explore-menu-list-item'>
-                    <img className={category===item.menu_name?"active":""} src={item.menu_image} alt="" />
+                    <img src={item.menu_image} className={category===item.menu_name?"active":""} alt="" />
                     <p>{item.menu_name}</p>
                 </div>
             )
         })}
       </div>
-      <hr />  
+      <hr />
     </div>
   )
 }
